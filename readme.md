@@ -8,6 +8,18 @@
 代码在 **c_000** 部分。
 
 ## synchronized关键字
+
+- synchronized(Object)
+    - 不能用String常量、Integer、Long。
+    - 锁住的是对象
+    - 代码 **c_014** 部分。
+
+- 线程同步
+    - synchronized锁的是对象，不是代码。
+    - **锁定方法和非锁定方法可以同步进行**
+    
+- synchronized优化：代码 **c_013** 部分
+
 synchronized底层实现：
 - 早期JDK中，synchronized是重量级的，即需要调用操作系统(OS)来申请锁。
 - 后来改进了，有了锁的升级：
@@ -23,3 +35,47 @@ synchronized底层实现：
 - 执行时间长，线程数多，用系统(OS)锁。重量级锁。
 
 synchronized代码在 **c_001** 至 **c_011** 部分。
+
+## volatile关键字
+- 保证线程间可见
+    - MESI
+    - 缓存一致性协议
+    
+- 禁止指令重排
+    - DCL单例
+    - Double Check Lock
+    
+可参考内容[Java内存模型](http://www.cnblogs.com/nexiyi/p/java_memory_model_and_thread.html)
+
+volatile代码在 **c_012** 部分  
+[单例模式--双检锁代码](https://github.com/wangwren/DesignPatterns/blob/master/src/main/java/com/wangwren/singleton/Singleton05.java)
+
+
+## CAS (无锁优化 自旋)
+**原子操作**
+
+- Compare And Set (CAS)
+
+- 操作原理
+
+```
+//V：代表目前的变量；E:代表期望值；N:代表新值
+//只有目前的变量值和所期望的值相等的时候，才会去赋值新值；否则再次尝试或失败
+cas(V,E,N){
+    if(V == E){
+        V = N;
+    }
+    //otherwise try again or fail
+}
+```
+
+- CAS 的 ABA 问题
+
+即期望值一开始是A，由于别人操作改成了B，之后又变成了A。
+解决方式：加version(版本)
+- A:1.0
+- B:2.0
+- A:3.0
+- cas(version)
+
+**如果是基础类型(int...)，无所谓；如果是引用类型，比如你和你的前女友复合，你不知道她中间经历了多少男人或女人，你不难受吗**。
