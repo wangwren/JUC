@@ -7,7 +7,7 @@
 
 代码在 **c_000** 部分。
 
-## synchronized关键字
+## synchronized关键字(悲观锁)
 
 - synchronized(Object)
     - 不能用String常量、Integer、Long。
@@ -51,7 +51,7 @@ volatile代码在 **c_012** 部分
 [单例模式--双检锁代码](https://github.com/wangwren/DesignPatterns/blob/master/src/main/java/com/wangwren/singleton/Singleton05.java)
 
 
-## CAS (无锁优化 自旋)
+## CAS (无锁优化 乐观、自旋)
 **原子操作**
 
 - Compare And Set (CAS)
@@ -59,7 +59,7 @@ volatile代码在 **c_012** 部分
 - 操作原理
 
 ```
-//V：代表目前的变量；E:代表期望值；N:代表新值
+//V：代表要改的那个值；E:代表期望值；N:代表新值
 //只有目前的变量值和所期望的值相等的时候，才会去赋值新值；否则再次尝试或失败
 cas(V,E,N){
     if(V == E){
