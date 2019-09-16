@@ -79,3 +79,17 @@ cas(V,E,N){
 - cas(version)
 
 **如果是基础类型(int...)，无所谓；如果是引用类型，比如你和你的前女友复合，你不知道她中间经历了多少男人或女人，你不难受吗**。
+
+Java的CAS操作，AtomicXXX类，都依靠了Unsafe类。这个类很牛逼，可以像C和C++一样操作内存，但是该类在JDK1.9之后不让用了。
+
+代码在**c_015**部分。
+
+## ReentrantLock 重入锁
+- ReentrantLock可用来替代synchronized，使用ReentrantLock可以完成同样的功能。
+- 注意：使用ReentrantLock**必须要手动释放锁**
+- 使用synchronized时，遇到异常，jvm会自动释放锁；但是使用ReentrantLock需要手动释放，所以经常将锁的释放写在finally中。
+- 使用reentrantlock可以进行“尝试锁定”tryLock，这样无法锁定，或者在指定时间内无法锁定，线程可以决定是否继续等待。
+- 使用ReentrantLock还可以调用lockInterruptibly方法，可以对线程interrupt方法做出响应，在一个线程等待锁的过程中，可以被打断。
+- ReentrantLock还可以指定为公平锁。
+
+代码在**c_016**部分
