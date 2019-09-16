@@ -93,3 +93,8 @@ Java的CAS操作，AtomicXXX类，都依靠了Unsafe类。这个类很牛逼，�
 - ReentrantLock还可以指定为公平锁。
 
 代码在**c_016**部分
+
+## CountDownLatch 门闩
+
+- 应用场景，可以等待其他线程都执行完毕后再继续执行别的操作。使用join方法也可以实现，但是join方法不太好控制。
+- 真是场景中，我使用过CountDownLatch。开启了十个线程去查询数据，等十个线程都操作完毕后，进行打包下载。
