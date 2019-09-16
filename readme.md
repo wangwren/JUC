@@ -7,7 +7,7 @@
 
 代码在 **c_000** 部分。
 
-## synchronized关键字(悲观锁)
+## synchronized关键字(**悲观锁**)
 
 - synchronized(Object)
     - 不能用String常量、Integer、Long。
@@ -51,7 +51,7 @@ volatile代码在 **c_012** 部分
 [单例模式--双检锁代码](https://github.com/wangwren/DesignPatterns/blob/master/src/main/java/com/wangwren/singleton/Singleton05.java)
 
 
-## CAS (无锁优化 乐观、自旋)
+## CAS (无锁优化 **乐观锁、自旋锁**)
 **原子操作**
 
 - Compare And Set (CAS)
@@ -82,6 +82,9 @@ cas(V,E,N){
 
 Java的CAS操作，AtomicXXX类，都依靠了Unsafe类。这个类很牛逼，可以像C和C++一样操作内存，但是该类在JDK1.9之后不让用了。
 
+- 分段锁
+LongAdder类
+
 代码在**c_015**部分。
 
 ## ReentrantLock 重入锁
@@ -98,3 +101,30 @@ Java的CAS操作，AtomicXXX类，都依靠了Unsafe类。这个类很牛逼，�
 
 - 应用场景，可以等待其他线程都执行完毕后再继续执行别的操作。使用join方法也可以实现，但是join方法不太好控制。
 - 真是场景中，我使用过CountDownLatch。开启了十个线程去查询数据，等十个线程都操作完毕后，进行打包下载。
+
+**countDown也不是说只能在一个线程里countDown一下，也可以在一个线程里countDown N多下**，只要到0了，就继续执行剩下代码。
+
+代码**c_017**部分
+
+## 栅栏
+
+
+## 阶段
+
+## ReadWriteLock 读写锁
+
+- **共享锁**，读锁就是共享锁，在读的时候大大提高效率。
+
+- **排他锁，互斥锁**。写锁就是排他锁
+
+## 信号量(灯)
+- 限流，最多的时候我允许你有多少个线程同时运行。
+- acquire，得到，这是一个阻塞方法，当来一个线程时，调用acquire，信号量减1，信号量为0时，别的线程就得等着。
+
+- 就是用来控制同时运行的线程，比如你有100个线程，但是信号量定为2，表示你有100个线程，但是同时运行的只有两个线程。
+
+## Exchanger
+
+只能是两个线程之间，exchange方法是阻塞的，一个A线程exchange了，另一个B线程没有exchange，那么A线程就等着，阻塞。
+
+三个线程之间没有意义。
