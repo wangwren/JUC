@@ -5,20 +5,20 @@
 - 线程的sleep、yield、join
 - 线程的状态
 
-代码在 **c_000** 部分。
+代码在 **[c_000](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_000)** 部分。
 
 ## synchronized关键字(**悲观锁**)
 
 - synchronized(Object)
     - 不能用String常量、Integer、Long。
     - 锁住的是对象
-    - 代码 **c_014** 部分。
+    - 代码 **[c_014](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_014)** 部分。
 
 - 线程同步
     - synchronized锁的是对象，不是代码。
     - **锁定方法和非锁定方法可以同步进行**
     
-- synchronized优化：代码 **c_013** 部分
+- synchronized优化：代码 **[c_013](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_013)** 部分
 
 synchronized底层实现：
 - 早期JDK中，synchronized是重量级的，即需要调用操作系统(OS)来申请锁。
@@ -34,7 +34,7 @@ synchronized底层实现：
 - 执行时间少(加锁代码)，线程数少(如果线程数太多了，用自旋也不行)，用自旋锁；因为每个线程会很快的执行完了。
 - 执行时间长，线程数多，用系统(OS)锁。重量级锁。
 
-synchronized代码在 **c_001** 至 **c_011** 部分。
+synchronized代码在 **[c_001](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_001)** 至 **[c_011](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_011)** 部分。
 
 ## volatile关键字
 - 保证线程间可见
@@ -47,7 +47,7 @@ synchronized代码在 **c_001** 至 **c_011** 部分。
     
 可参考内容[Java内存模型](http://www.cnblogs.com/nexiyi/p/java_memory_model_and_thread.html)
 
-volatile代码在 **c_012** 部分  
+volatile代码在 **[c_012](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_012)** 部分  
 [单例模式--双检锁代码](https://github.com/wangwren/DesignPatterns/blob/master/src/main/java/com/wangwren/singleton/Singleton05.java)
 
 
@@ -85,7 +85,7 @@ Java的CAS操作，AtomicXXX类，都依靠了Unsafe类。这个类很牛逼，�
 - 分段锁
 LongAdder类
 
-代码在**c_015**部分。
+代码在**[c_015](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_015)**部分。
 
 ## ReentrantLock 重入锁
 - ReentrantLock可用来替代synchronized，使用ReentrantLock可以完成同样的功能。
@@ -95,7 +95,7 @@ LongAdder类
 - 使用ReentrantLock还可以调用lockInterruptibly方法，可以对线程interrupt方法做出响应，在一个线程等待锁的过程中，可以被打断。
 - ReentrantLock还可以指定为公平锁。
 
-代码在**c_016**部分
+代码在**[c_016](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_016)**部分
 
 ## CountDownLatch 门闩
 
@@ -104,27 +104,38 @@ LongAdder类
 
 **countDown也不是说只能在一个线程里countDown一下，也可以在一个线程里countDown N多下**，只要到0了，就继续执行剩下代码。
 
-代码**c_017**部分
+代码**[c_017](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_017)**部分
 
-## 栅栏
+## CyclicBarrier(栅栏)
 
+代码**[c_018](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_018)**部分
 
-## 阶段
+## Phaser(阶段)
+
+代码**[c_019](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_019)**部分
 
 ## ReadWriteLock 读写锁
 
-- **共享锁**，读锁就是共享锁，在读的时候大大提高效率。
+- **共享锁**，读锁就是共享锁，在读的时候大大提高效率。即只要是读操作，就不会阻塞等待锁释放，大家可以一起读。
 
-- **排他锁，互斥锁**。写锁就是排他锁
+- **排他锁，互斥锁**，写锁就是排他锁
 
-## 信号量(灯)
+代码**[c_020](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_020)**部分
+
+## Semaphore信号量(灯)
 - 限流，最多的时候我允许你有多少个线程同时运行。
 - acquire，得到，这是一个阻塞方法，当来一个线程时，调用acquire，信号量减1，信号量为0时，别的线程就得等着。
 
 - 就是用来控制同时运行的线程，比如你有100个线程，但是信号量定为2，表示你有100个线程，但是同时运行的只有两个线程。
+
+- release，线程业务处理完毕后，一定要调用该方法，将个数还回去，否则影响别的线程的运行，会导致别的线程一直处于阻塞
+
+代码**[c_21](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_021)**部分
 
 ## Exchanger
 
 只能是两个线程之间，exchange方法是阻塞的，一个A线程exchange了，另一个B线程没有exchange，那么A线程就等着，阻塞。
 
 三个线程之间没有意义。
+
+代码**[c_022](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_022)**部分
