@@ -95,6 +95,13 @@ LongAdder类
 - 使用ReentrantLock还可以调用lockInterruptibly方法，可以对线程interrupt方法做出响应，在一个线程等待锁的过程中，可以被打断。
 - ReentrantLock还可以指定为公平锁。
 
+### synchronized和ReentrantLock有什么不同？
+- synchronized是系统自带，可以自动加锁，自动解锁；ReentrantLock需要手动加锁，手动解锁。
+- ReentrantLock可以出现各种各样的等待队列。synchronized做不到这一点。
+- 底层实现：
+    - ReentrantLock底层是CAS的实现；
+    - synchronized默认进行了四种锁的状态的升级。
+
 代码在**[c_016](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_016)**部分
 
 ## CountDownLatch 门闩
