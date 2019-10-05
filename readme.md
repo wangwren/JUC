@@ -137,7 +137,7 @@ LongAdder类
 
 - release，线程业务处理完毕后，一定要调用该方法，将个数还回去，否则影响别的线程的运行，会导致别的线程一直处于阻塞
 
-代码**[c_21](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_021)**部分
+代码**[c_21](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_21)**部分
 
 ## Exchanger
 
@@ -146,3 +146,9 @@ LongAdder类
 三个线程之间没有意义。
 
 代码**[c_022](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_022)**部分
+
+## LockSupport
+
+LockSupport翻译过来是**锁支持**。
+
+代码[c_023](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_022)
