@@ -151,4 +151,4 @@ LongAdder类
 
 LockSupport翻译过来是**锁支持**。
 
-代码[c_023](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_022)
+代码[c_023](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_023)
