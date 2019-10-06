@@ -137,7 +137,7 @@ LongAdder类
 
 - release，线程业务处理完毕后，一定要调用该方法，将个数还回去，否则影响别的线程的运行，会导致别的线程一直处于阻塞
 
-代码**[c_21](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_21)**部分
+代码**[c_021](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_021)**部分
 
 ## Exchanger
 
@@ -152,3 +152,18 @@ LongAdder类
 LockSupport翻译过来是**锁支持**。
 
 代码[c_023](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_023)
+
+## 淘宝面试题
+
+- 实现一个容器，提供两个方法，add和size；写两个线程，线程1添加10个元素至容器中，线程2实现监控元素个数，当容器内个数达到5个的时候，线程2给出提示并结束。
+    - 使用volatile方式，但是这种方式并不能解决。代码：[T01_WithoutVolatile](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_024_01_interview/T01_WithoutVolatile.java)、[T02_WithVolatile](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_024_01_interview/T02_WithVolatile.java)
+    - 使用wait、notify方式解决：
+        - wait会释放锁，而notify不会释放锁。
+        - [T03_NotifyHoldingLock](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_024_01_interview/T03_NotifyHoldingLock.java)、[T04_NotifyFreeLock](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_024_01_interview/T04_NotifyFreeLock.java)
+    - 使用CountDownLatch解决。代码：[T05_CountDownLatch](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_024_01_interview/T05_CountDownLatch.java)
+    - 使用LockSupport解决。代码：[T06_LockSupport](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_024_01_interview/T06_LockSupport.java)
+    
+- 写一个固定容量同步容器，拥有put和get方法，以及getCount方法，能够支持2个生产者线程以及10个消费者线程的阻塞调用。
+    - 使用wait和notify/notifyAll实现：[MyContainer1](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_024_02_interview/MyContainer1.java)
+    - 使用Lock和Condition的方式，可以更精准的指定哪些线程被唤醒：[MyContainer2](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_024_02_interview/MyContainer2.java)
+    - **这两种写法应该背下来**。
