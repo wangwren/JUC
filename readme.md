@@ -159,6 +159,7 @@ LockSupport翻译过来是**锁支持**。
     - 使用volatile方式，但是这种方式并不能解决。代码：[T01_WithoutVolatile](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_024_01_interview/T01_WithoutVolatile.java)、[T02_WithVolatile](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_024_01_interview/T02_WithVolatile.java)
     - 使用wait、notify方式解决：
         - wait会释放锁，而notify不会释放锁。
+        - **在调用wait()和notify()之前，必须使用synchronized语义绑定住被wait/notify对象**，否则会报错。
         - [T03_NotifyHoldingLock](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_024_01_interview/T03_NotifyHoldingLock.java)、[T04_NotifyFreeLock](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_024_01_interview/T04_NotifyFreeLock.java)
     - 使用CountDownLatch解决。代码：[T05_CountDownLatch](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_024_01_interview/T05_CountDownLatch.java)
     - 使用LockSupport解决。代码：[T06_LockSupport](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_024_01_interview/T06_LockSupport.java)
