@@ -168,3 +168,18 @@ LockSupport翻译过来是**锁支持**。
     - 使用wait和notify/notifyAll实现：[MyContainer1](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_024_02_interview/MyContainer1.java)
     - 使用Lock和Condition的方式，可以更精准的指定哪些线程被唤醒：[MyContainer2](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_024_02_interview/MyContainer2.java)
     - **这两种写法应该背下来**。
+    
+## AQS
+
+AQS的核心就是使用CAS的操作，操作双向链表的head和tail，替代了synchronized操作。
+
+- VarHandle(JDK1.9)：
+    - 普通属性也可以进行原子性操作；
+    - 比反射快，直接操纵二进制码。
+    
+    
+## ThreadLocal
+用途：spring的声明式事务，保证同一个connection
+
+
+## 强软弱虚
