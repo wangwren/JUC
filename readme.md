@@ -169,16 +169,28 @@ LockSupport翻译过来是**锁支持**。
     - 使用Lock和Condition的方式，可以更精准的指定哪些线程被唤醒：[MyContainer2](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_024_02_interview/MyContainer2.java)
     - **这两种写法应该背下来**。
     
-## AQS
+## AQS(重要)
 
 AQS的核心就是使用CAS的操作，操作双向链表的head和tail，替代了synchronized操作。
 
-- VarHandle(JDK1.9)：
-    - 普通属性也可以进行原子性操作；
-    - 比反射快，直接操纵二进制码。
+参考这篇文章，包含AQS讲解和ReentrantLock源码的分析(jDK1.8):[从源码角度彻底理解ReentrantLock(重入锁)](https://www.cnblogs.com/takumicx/p/9402021.html)
+
+还可以看这篇[JAVA并发编程: CAS和AQS](https://blog.csdn.net/u010862794/article/details/72892300)
+
+代码[c_025_AQS](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_025_AQS)
+
+### VarHandle(JDK1.9)：
+
+代码[c_026_VarHandle](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_026_VarHandle/T01_HelloVarHandle.java)
+
+- 普通属性也可以进行原子性操作；
+- 比反射快，直接操纵二进制码。
     
     
 ## ThreadLocal
+
+代码[c_027_ThreadLocal](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_027_ThreadLocal)
+
 用途：spring的声明式事务，保证同一个connection
 
 
