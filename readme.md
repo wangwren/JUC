@@ -217,6 +217,8 @@ AQS的核心就是使用CAS的操作，操作双向链表的head和tail，替代
 
 对应的ThreadLocal中的ThreadLocalMap的Entity继承的就是弱引用。
 
+![](https://imagebed-1259286100.cos.ap-beijing.myqcloud.com/img/2019-10-11_23-38-09.png)
+
 还有WeakHashMap，可以参考这篇文章或看源码：[WeakHashMap的详细理解](https://blog.csdn.net/qiuhao9527/article/details/80775524)
 
 ### 虚引用(PhantomReference)
