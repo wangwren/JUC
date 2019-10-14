@@ -193,5 +193,11 @@ AQS的核心就是使用CAS的操作，操作双向链表的head和tail，替代
 
 用途：spring的声明式事务，保证同一个connection
 
+参考文章：[Java并发编程：深入剖析ThreadLocal](https://www.cnblogs.com/dolphin0520/p/3920407.html)
+
+- 实际的通过ThreadLocal创建的副本是存储在每个线程自己的threadLocals中；
+- 为何threadLocals的类型ThreadLocalMap的键值为ThreadLocal对象，因为每个线程中可以有多个threadLocal变量；
+- 在进行get之前必须先set，否则会报空异常。如果想在get之前不需要调用set就能正常访问的话，必须重写initalValue()方法。
+
 
 ## 强软弱虚
