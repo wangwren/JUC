@@ -5,20 +5,20 @@
 - 线程的sleep、yield、join
 - 线程的状态
 
-代码在 **[c_000](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_000)** 部分。
+代码在 [c_000](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_000) 部分。
 
 ## synchronized关键字(**悲观锁**)
 
 - synchronized(Object)
     - 不能用String常量、Integer、Long。
     - 锁住的是对象
-    - 代码 **[c_014](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_014)** 部分。
+    - 代码 [c_014](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_014) 部分。
 
 - 线程同步
     - synchronized锁的是对象，不是代码。
     - **锁定方法和非锁定方法可以同步进行**
     
-- synchronized优化：代码 **[c_013](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_013)** 部分
+- synchronized优化：代码 [c_013](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_013) 部分
 
 synchronized底层实现：
 - 早期JDK中，synchronized是重量级的，即需要调用操作系统(OS)来申请锁。
@@ -34,7 +34,7 @@ synchronized底层实现：
 - 执行时间少(加锁代码)，线程数少(如果线程数太多了，用自旋也不行)，用自旋锁；因为每个线程会很快的执行完了。
 - 执行时间长，线程数多，用系统(OS)锁。重量级锁。
 
-synchronized代码在 **[c_001](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_001)** 至 **[c_011](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_011)** 部分。
+synchronized代码在[c_001](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_001) 至 [c_011](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_011) 部分。
 
 ## volatile关键字
 - 保证线程间可见
@@ -47,7 +47,7 @@ synchronized代码在 **[c_001](https://github.com/wangwren/JUC/tree/master/src/
     
 可参考内容[Java内存模型](http://www.cnblogs.com/nexiyi/p/java_memory_model_and_thread.html)
 
-volatile代码在 **[c_012](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_012)** 部分  
+volatile代码在 [c_012](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_012) 部分  
 [单例模式--双检锁代码](https://github.com/wangwren/DesignPatterns/blob/master/src/main/java/com/wangwren/singleton/Singleton05.java)
 
 
@@ -85,7 +85,7 @@ Java的CAS操作，AtomicXXX类，都依靠了Unsafe类。这个类很牛逼，�
 - 分段锁
 LongAdder类
 
-代码在**[c_015](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_015)**部分。
+代码在[c_015](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_015)部分。
 
 ## ReentrantLock 重入锁
 - ReentrantLock可用来替代synchronized，使用ReentrantLock可以完成同样的功能。
@@ -102,7 +102,7 @@ LongAdder类
     - ReentrantLock底层是CAS的实现；
     - synchronized默认进行了四种锁的状态的升级。
 
-代码在**[c_016](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_016)**部分
+代码在[c_016](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_016)部分
 
 ## CountDownLatch 门闩
 
@@ -111,15 +111,15 @@ LongAdder类
 
 **countDown也不是说只能在一个线程里countDown一下，也可以在一个线程里countDown N多下**，只要到0了，就继续执行剩下代码。
 
-代码**[c_017](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_017)**部分
+代码[c_017](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_017)部分
 
 ## CyclicBarrier(栅栏)
 
-代码**[c_018](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_018)**部分
+代码[c_018](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_018)部分
 
 ## Phaser(阶段)
 
-代码**[c_019](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_019)**部分
+代码[c_019](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_019)部分
 
 ## ReadWriteLock 读写锁
 
@@ -127,7 +127,7 @@ LongAdder类
 
 - **排他锁，互斥锁**，写锁就是排他锁
 
-代码**[c_020](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_020)**部分
+代码[c_020](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_020)部分
 
 ## Semaphore信号量(灯)
 - 限流，最多的时候我允许你有多少个线程同时运行。
@@ -137,7 +137,7 @@ LongAdder类
 
 - release，线程业务处理完毕后，一定要调用该方法，将个数还回去，否则影响别的线程的运行，会导致别的线程一直处于阻塞
 
-代码**[c_021](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_021)**部分
+代码[c_021](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_021)部分
 
 ## Exchanger
 
@@ -145,7 +145,7 @@ LongAdder类
 
 三个线程之间没有意义。
 
-代码**[c_022](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_022)**部分
+代码[c_022](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_022)部分
 
 ## LockSupport
 
@@ -202,7 +202,7 @@ AQS的核心就是使用CAS的操作，操作双向链表的head和tail，替代
 
 ## 强软弱虚
 
-代码:[c_029_RefType]()
+代码:[c_029_RefType](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_029_RefType)
 
 ### 强引用
 我们平常典型编码 `Object obj = new Object();`中的obj就是强引用。通过关键字new创建的对象所关联的引用就是强引用。当JVM内存空间不足，JVM宁愿抛出OOM运行时错误，使程序异常终止，也不会随意回收具有强引用的“存活”对象来解决内存不足的问题。对于一个普通对象，如果没有其他引用关系，只要超过了引用的作用域或者显示地将相应(强)引用赋值为null，就是可以被垃圾收集了，具体回收时机要看垃圾收集策略。
@@ -215,7 +215,7 @@ AQS的核心就是使用CAS的操作，操作双向链表的head和tail，替代
 ### 弱引用(WeakReference)
 弱引用通过WeakReference类实现。弱引用的生命周期比软引用短。在垃圾回收器线程扫描它所管辖的内存区域的过程中，一旦发现了具有弱引用的对象，不管当前内存空间足够与否，都会回收它的内存。由于垃圾回收器是一个优先级很低的线程，因此不一定会很快回收弱引用的对象。弱引用可以和一个引用队列（ReferenceQueue）联合使用，如果弱引用所引用的对象被垃圾回收，Java虚拟机就会把这个弱引用加入到与之关联的引用队列中。
 
-对应的ThreadLocal中的ThreadLocalMap的Entity继承的就是弱引用。
+对应的ThreadLocal中的ThreadLocalMap的Entry继承的就是弱引用。
 
 ![](https://imagebed-1259286100.cos.ap-beijing.myqcloud.com/img/2019-10-11_23-38-09.png)
 
