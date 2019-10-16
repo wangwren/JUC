@@ -232,3 +232,13 @@ PhantomReference pr = new PhantomReference (object, queue);
 程序可以通过判断引用队列中是否已经加入了虚引用，来了解被引用的对象是否将要被垃圾回收。如果程序发现某个虚引用已经被加入到引用队列，那么就可以在所引用的对象的内存被回收之前采取一些程序行动。
 
 应用场景：可用来跟踪对象被垃圾回收器回收的活动，当一个虚引用关联的对象被垃圾收集器回收之前会收到一条系统通知。
+
+## 容器(这里介绍容器为线程池做准备)
+
+![](https://imagebed-1259286100.cos.ap-beijing.myqcloud.com/img/31571235049_.pic.jpg)
+
+Java中容器分两大类：Collection和Map，其中Collection中又分List、Set、Queue。  
+
+Queue是后加的，在很大程度上是为了高并发准备的(线程池中经常用)，其中阻塞队列(BlockingQueue)很重要。(这也是List和Queue的区别)。
+
+Vector和HashTable在JDK1.0就有了，在当初设计的时候有点问题，在其内部的所有方法上都加了锁，自带锁，现在基本不用。
