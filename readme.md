@@ -235,10 +235,15 @@ PhantomReference pr = new PhantomReference (object, queue);
 
 ## 容器(这里介绍容器为线程池做准备)
 
-![](https://imagebed-1259286100.cos.ap-beijing.myqcloud.com/img/31571235049_.pic.jpg)
+![container](https://imagebed-1259286100.cos.ap-beijing.myqcloud.com/img/31571235049_.pic.jpg)
 
 Java中容器分两大类：Collection和Map，其中Collection中又分List、Set、Queue。  
 
 Queue是后加的，在很大程度上是为了高并发准备的(线程池中经常用)，其中阻塞队列(BlockingQueue)很重要。(这也是List和Queue的区别)。
 
 Vector和HashTable在JDK1.0就有了，在当初设计的时候有点问题，在其内部的所有方法上都加了锁，自带锁，现在基本不用。
+
+### Map
+代码：[c_030_FromHashTable2CHM]()
+
+Map的进化历程：HashTable -> HashMap -> SynchronizedHashMap -> ConcurrentHashMap
