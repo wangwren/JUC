@@ -237,13 +237,29 @@ PhantomReference pr = new PhantomReference (object, queue);
 
 ![container](https://imagebed-1259286100.cos.ap-beijing.myqcloud.com/img/31571235049_.pic.jpg)
 
-Java中容器分两大类：Collection和Map，其中Collection中又分List、Set、Queue。  
+Java中容器分两大类：Collection和Map，其中Coll8ection中又分List、Set、Queue。  
 
 Queue是后加的，在很大程度上是为了高并发准备的(线程池中经常用)，其中阻塞队列(BlockingQueue)很重要。(这也是List和Queue的区别)。
 
 Vector和HashTable在JDK1.0就有了，在当初设计的时候有点问题，在其内部的所有方法上都加了锁，自带锁，现在基本不用。
 
 ### Map
-代码：[c_030_FromHashTable2CHM]()
+代码：[c_030_01_FromHashTable2CHM](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_030_01_FromHashTable2CHM)
 
 Map的进化历程：HashTable -> HashMap -> SynchronizedHashMap -> ConcurrentHashMap
+
+### Collection
+
+代码：[c_030_02_FromVector2Queue](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_030_02_FromVector2Queue)
+
+进化历程：Vector -> List -> SynchronizedList -> Queue
+
+- 同步容器类:
+    - Vector、HashTable ：早期使用synchronized实现。
+    - ArrayList、HashSet ：未考虑多线程安全(未实现同步)。
+    - Collections.synchronizedXXX：其内部也是使用的synchronized。
+    
+使用早期的**同步容器**以及Collections.snchronizedXXX方法的不足之处，参考：
+http://blog.csdn.net/itm_hadf/article/details/7506529
+
+使用新的并发容器：http://xuganggogo.iteye.com/blog/321630
