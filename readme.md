@@ -248,6 +248,10 @@ Vector和HashTable在JDK1.0就有了，在当初设计的时候有点问题，�
 
 Map的进化历程：HashTable -> HashMap -> SynchronizedHashMap -> ConcurrentHashMap
 
+跳表参考:http://blog.csdn.net/sunxianghuang/article/details/52221913
+
+[T01_ConcurrentHashMap](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_031/T01_ConcurrentHashMap.java)
+
 ### Collection
 
 代码：[c_030_02_FromVector2Queue](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_030_02_FromVector2Queue)
@@ -263,3 +267,66 @@ Map的进化历程：HashTable -> HashMap -> SynchronizedHashMap -> ConcurrentHa
 http://blog.csdn.net/itm_hadf/article/details/7506529
 
 使用新的并发容器：http://xuganggogo.iteye.com/blog/321630
+
+#### CopyOnWriteList
+代码：[T02_CopyOnWriteList](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_031/T02_CopyOnWriteList.java)
+- 写时复制容器 copy on write
+- 多线程环境下，写时效率低，读时效率高；适合读多写少的环境。
+- CopyOnWriteArrayList源码中，写时会加锁，并建了一个新的数组，并比之前的数组+1大小，将新元素放入新的位置
+
+![add](https://imagebed-1259286100.cos.ap-beijing.myqcloud.com/img/copyonwritelistadd.png)
+
+- 读的时候不加锁，因为读的时候，新的和老的元素都一样，不需要加锁。
+
+![get](https://imagebed-1259286100.cos.ap-beijing.myqcloud.com/img/copyonwirteget.png)
+
+### Queue
+- offer，对应add，加后会有一个返回值，成功返回true，不成功返回false
+- add加不进去则会抛出异常。在Queue中经常使用offer。
+- peek，取元素，但是并不会删除掉该元素。
+- poll，取元素，并且删除掉该元素。
+
+ConcurrentQueue都是线程安全的操作。[T03_ConcurrentQueue](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_031/T03_ConcurrentQueue.java)
+
+#### BlockingQueue
+
+LinkedBlockingQueue无界的；ArrayBlockingQueue有界的。
+
+[T04_LinkedBlockingQueue](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_031/T04_LinkedBlockingQueue.java)
+
+[T05_ArrayBlockingQueue](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_031/T05_ArrayBlockingQueue.java)
+
+BlockingQueue在Queue的基础上多了`put`和`take`方法(这两个方法才体现了Blocking，offer是不会阻塞的)。
+put元素时如果慢了，则线程会阻塞住；take取元素时，没有元素了会阻塞住。
+BlockingQueue是天生的友好的**生产者消费者模型**
+
+##### DelayQueue
+- 是BlockingQueue的一种，也是一种阻塞的队列。区别是DelayQueue可以按等待时间排序。通过compareTo来做比较的，可以自己指定比较规则。
+- 一般用来按时间进行任务调度。
+- 实际上是通过PriorityQueue来实现的。
+
+[T06_DelayQueue](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_031/T06_DelayQueue.java)
+
+##### SynchronusQueue(同步Queue)
+- 两个线程间的同步交换。
+- **容量为0**，不是用来存放元素的，而是用来给别的线程下达任务的。
+- 只能用来阻塞式的put的调用，等着别人take；如果使用add方法，则直接报错，因为容量为0，不可以往里面放元素。
+
+[T08_SynchronousQueue](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_031/T08_SynchronousQueue.java)
+
+##### TransferQueue
+- 等待多个线程的取走、消费；而SynchronusQueue是一个线程对一个线程。
+- 多了`transfer`方法，该方法装元素，装完等着，有人来取才会继续。
+- 而使用 `put` 方法装完就不管了，装完就继续执行了，不等待。
+
+[T09_TransferQueue](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_031/T09_TransferQueue.java)
+
+#### PriorityQueue
+PriorityQueue是有排序的，内部是一课堆排序的树结构。
+
+[T07_PriorityQueue](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_031/T07_PriorityQueue.java)
+
+### 面试题
+- **Queue和List的区别**
+    - Queue多了对线程友好的API(offer、peek、poll)；
+    - BlockingQueue又多了take，put，这两个是阻塞的API，是生产者消费者的模型。
