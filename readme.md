@@ -263,7 +263,7 @@ Map的进化历程：HashTable -> HashMap -> SynchronizedHashMap -> ConcurrentHa
     - ArrayList、HashSet ：未考虑多线程安全(未实现同步)。
     - Collections.synchronizedXXX：其内部也是使用的synchronized。
     
-使用早期的**同步容器**以及Collections.snchronizedXXX方法的不足之处，参考：
+使用早期的**同步容器**以及`Collections.snchronizedXXX`方法的不足之处，参考：
 http://blog.csdn.net/itm_hadf/article/details/7506529
 
 使用新的并发容器：http://xuganggogo.iteye.com/blog/321630
@@ -274,7 +274,9 @@ http://blog.csdn.net/itm_hadf/article/details/7506529
 - 多线程环境下，写时效率低，读时效率高；适合读多写少的环境。
 - CopyOnWriteArrayList源码中，写时会加锁，并建了一个新的数组，并比之前的数组+1大小，将新元素放入新的位置
 
-![add](https://imagebed-1259286100.cos.ap-beijing.myqcloud.com/img/copyonwritelistadd.png)
+
+![](https://imagebed-1259286100.cos.ap-beijing.myqcloud.com/img/copyonwritelistadd.png)
+
 
 - 读的时候不加锁，因为读的时候，新的和老的元素都一样，不需要加锁。
 
