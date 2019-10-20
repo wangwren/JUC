@@ -10,7 +10,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @description: 使用lockCondition解决
  * @version: 1.0
  */
-public class LockCondition {
+public class T03_LockCondition {
     char[] letters = "ABCDEFG".toCharArray();
     char[] nums = "1234567".toCharArray();
 
@@ -21,7 +21,7 @@ public class LockCondition {
     public static void main(String[] args) {
 
 
-        LockCondition lc = new LockCondition();
+        T03_LockCondition lc = new T03_LockCondition();
 
         new Thread(() -> {
             lc.printNums();

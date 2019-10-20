@@ -8,7 +8,7 @@ import java.util.concurrent.locks.Lock;
  * @description: 使用wait/notify实现A1B2C3
  * @version: 1.0
  */
-public class WaitNotify {
+public class T02_WaitNotify {
 
 
 
