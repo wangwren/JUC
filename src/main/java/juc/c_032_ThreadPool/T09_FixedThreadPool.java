@@ -45,6 +45,8 @@ public class T09_FixedThreadPool {
             e.printStackTrace();
         }
 
+        service.shutdown();
+
         end = System.currentTimeMillis();
 
         System.out.println("多线程用时：" + (end - start));
