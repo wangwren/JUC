@@ -275,7 +275,7 @@ http://blog.csdn.net/itm_hadf/article/details/7506529
 - CopyOnWriteArrayList源码中，写时会加锁，并建了一个新的数组，并比之前的数组+1大小，将新元素放入新的位置
 
 
-![](https://imagebed-1259286100.cos.ap-beijing.myqcloud.com/img/copyonwritelistadd.png)
+![copyonwritelistadd](https://imagebed-1259286100.cos.ap-beijing.myqcloud.com/img/copyonwritelistadd.png)
 
 
 - 读的时候不加锁，因为读的时候，新的和老的元素都一样，不需要加锁。
@@ -332,3 +332,11 @@ PriorityQueue是有排序的，内部是一课堆排序的树结构。
 - **Queue和List的区别**
     - Queue多了对线程友好的API(offer、peek、poll)；
     - BlockingQueue又多了take，put，这两个是阻塞的API，是生产者消费者的模型。
+    
+## 面试题(交替打印)
+- 题：使用两个线程，线程1打印 A B C ...;线程2打印 1 2 3...最后打印出的结果要是A1B2C3这种交替打印。
+- **在调用wait()和notify()之前，必须使用synchronized语义绑定住被wait/notify对象**，否则会报错。
+
+- 提供了多种实现方式，难易程度：LockSupport cas BlockingQueue wait-notify lock-condition (仅供参考)。
+
+代码：[c_028_interview](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_028_interview/A1B2C3)
