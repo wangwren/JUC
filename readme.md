@@ -45,7 +45,7 @@ synchronized代码在[c_001](https://github.com/wangwren/JUC/tree/master/src/mai
     - DCL单例
     - Double Check Lock
     
-可参考内容[Java内存模型](http://www.cnblogs.com/nexiyi/p/java_memory_model_and_thread.html)
+**可参考内容**[Java内存模型](http://www.cnblogs.com/nexiyi/p/java_memory_model_and_thread.html)
 
 volatile代码在 [c_012](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_012) 部分  
 [单例模式--双检锁代码](https://github.com/wangwren/DesignPatterns/blob/master/src/main/java/com/wangwren/singleton/Singleton05.java)
@@ -292,7 +292,7 @@ ConcurrentQueue都是线程安全的操作。[T03_ConcurrentQueue](https://githu
 
 #### BlockingQueue
 
-LinkedBlockingQueue无界的；ArrayBlockingQueue有界的。
+LinkedBlockingQueue无界的，最大是Integer.MAX_VALUE；ArrayBlockingQueue有界的。
 
 [T04_LinkedBlockingQueue](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_031/T04_LinkedBlockingQueue.java)
 
@@ -340,3 +340,103 @@ PriorityQueue是有排序的，内部是一课堆排序的树结构。
 - 提供了多种实现方式，难易程度：LockSupport cas BlockingQueue wait-notify lock-condition (仅供参考)。
 
 代码：[c_028_interview](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_028_interview/A1B2C3)
+
+## 线程池
+
+- [T01_MyExecutor](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_032_ThreadPool/T01_MyExecutor.java)
+- [T02_ExecutorService](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_032_ThreadPool/T02_ExecutorService.java)
+- Callable就类型与Runnable，但是Callable有返回值，一般用在线程池。[T03_Callable](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_032_ThreadPool/T03_Callable.java)
+- Future存储执行的将来才会产生的结果。[T03_Callable](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_032_ThreadPool/T03_Callable.java)
+- FutureTask，相当于Future + Runnable，即可以执行，又可以存结果。[T04_FutureTask](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_032_ThreadPool/T04_FutureTask.java)
+- CompletableFuture，可以用来管理多个Future的结果(这只是其中一个)，其底层是ForkJoinPool。**这个类很强大，可以多搜一搜**。
+    - [T05_CompletableFuture](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_032_ThreadPool/T05_CompletableFuture.java)
+
+### 两种线程池
+- **ThreadPoolExecutor**
+    - 线程池忙(包括指定的最大线程数)，而且任务队列满，这时候会进行**拒绝策略**(拒绝策略可以自定义，但是JDK提供了四种)。
+    - 四种拒绝策略：(实战上都不用，一般都自定义)
+        - AbortPolicy：抛异常。
+        - DiscardPolicy：扔掉，不抛异常。
+        - DiscardOldestPolicy：扔掉排队时间最久的。
+        - CallerRunsPolicy：调用者处理任务。谁提交任务，谁来执行。
+        
+    - 有两种执行线程池的方法execute和submit，这两个方法都可以启动线程，但是submit有返回值，可以返回一个future对象
+        
+- **ForkJoinPool**
+    - 分解汇总的任务
+    - 用很少的线程可以执行很多的任务(子任务)，ThreadPoolExecutor做不到先执行子任务。
+    - CPU密集型
+        
+**简单使用及参数说明，这个要背下来**：[T06_HelloThreadPool](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_032_ThreadPool/T06_HelloThreadPool.java)
+
+### Executors
+- Executors，可以看成是线程池的工厂，可以用来产生各种各样的线程池。
+- 其底层都是靠ThreadPoolExecutor实现的。
+
+> Executors返回的线程池对象的弊端如下：
+> 1. FixedThreadPool和SingleThreadExecutor：允许的请求队列长度为`Integer.MAX_VALUE`，可能会堆积大量的请求，从而导致OOM。
+> 2. CachedThreadPool和ScheduledThreadPool：允许的创建线程数量为`Integer.MAX_VALUE`，可能会创建大量的线程，从而导致OOM。
+
+#### SingleThreadExecutor
+`Executors.newSingleThreadExecutor`只有一个线程的线程池，可以保证任务扔进去的顺序。
+
+可以去看源码实现，都是使用的ThreadPoolExecutor类来指定的。
+
+- 为什么要有单线程的线程池？
+    - 线程池是有任务队列的。任务数量最大是Integer.MAX_VALUE
+    - 有线程的完整的生命周期管理。
+    
+
+![singleThreadExecutor](https://imagebed-1259286100.cos.ap-beijing.myqcloud.com/img/singleThreadExecutor.png)
+
+    
+代码：[T07_SingleThreadExecutor](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_032_ThreadPool/T07_SingleThreadExecutor.java)
+    
+    
+#### CachedThreadPool
+- 没有核心线程
+- 最大线程数为Integer.MAX_VALUE
+- 线程空闲时间的为60秒
+- 任务队列为SynchronousQueue，这个Queue的容量为0。
+
+这个线程池，来任务就起一个新的线程，不会放入队列中，因为任务队列为SynchronousQueue的容量为0.
+
+![cachedthreadpool](https://imagebed-1259286100.cos.ap-beijing.myqcloud.com/img/cachedthreadpool.png)
+
+代码：[T08_CachedThreadPool](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_032_ThreadPool/T08_CachedThreadPool.java)
+
+#### FixedThreadPool
+- 固定的线程数。可以自己指定线程数。
+- **确确实实可以让任务并行处理的，可以提高效率**。
+
+![fixthreadpool](https://imagebed-1259286100.cos.ap-beijing.myqcloud.com/img/fixthreadpool.png)
+
+代码：[T09_FixedThreadPool](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_032_ThreadPool/T09_FixedThreadPool.java)
+
+#### ScheduledThreadPool
+- 也可以指定核心线程数。
+- 专门用来执行**定时任务的线程池**
+- 它的任务队列是DelayedWorkQueue，可以指定多长时间之后运行。
+
+![scheduledthreadpool](https://imagebed-1259286100.cos.ap-beijing.myqcloud.com/img/scheduledthreadpool.png)
+
+代码：[T10_ScheduleThreadPool](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_032_ThreadPool/T10_ScheduleThreadPool.java)
+
+##### Cached vs Fixed
+阿里都不用，自己估算，进行精确定义。
+
+### 并发(concurrent) vs 并行(parallel)
+- 并发，并发是指任务**提交**。
+- 并行，并行是指任务**执行**。
+
+并行是并发的子集。
+
+## TheadPoolExecutor源码解析
+[ThreadPoolExecutor源码解析]()
+
+### ForkJoinPool
+
+
+### WorkStealing
+- 每一个线程都有一个自己的队列，当自己队列中的任务执行完毕后，会去别的线程的队列上拿一个任务来执行。
+- 本质上是一个ForkJoinPool。
