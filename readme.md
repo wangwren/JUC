@@ -418,7 +418,10 @@ PriorityQueue是有排序的，内部是一课堆排序的树结构。
 - 专门用来执行**定时任务的线程池**
 - 它的任务队列是DelayedWorkQueue，可以指定多长时间之后运行。
 
+
 ![scheduledthreadpool](https://imagebed-1259286100.cos.ap-beijing.myqcloud.com/img/scheduledthreadpool.png)
+
+
 
 代码：[T10_ScheduleThreadPool](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_032_ThreadPool/T10_ScheduleThreadPool.java)
 
