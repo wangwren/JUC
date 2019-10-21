@@ -1,5 +1,7 @@
 # 高并发与多线程
 
+![juc](https://imagebed-1259286100.cos.ap-beijing.myqcloud.com/img/juc.jpg)
+
 ## 线程
 - 线程的创建和启动
 - 线程的sleep、yield、join
@@ -435,9 +437,12 @@ PriorityQueue是有排序的，内部是一课堆排序的树结构。
 并行是并发的子集。
 
 ## TheadPoolExecutor源码解析
-[ThreadPoolExecutor源码解析]()
+[ThreadPoolExecutor源码解析](http://wangwren.com/2019/10/ThreadPoolExecutor%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/)
 
 ### ForkJoinPool
+
+![51571581502_](https://imagebed-1259286100.cos.ap-beijing.myqcloud.com/img/51571581502_.pic.jpg)
+
 -  **Fork/Join框架**：就是在必要的情况下，将一个大任务，进行拆分(fork)成若干个小任务(拆到不可再拆时)，再将一个个的小任务运算的结果进行join汇总。
 
 #### Fork/Join框架与传统线程池的区别
@@ -446,8 +451,13 @@ PriorityQueue是有排序的，内部是一课堆排序的树结构。
 - 相对于一般的线程池实现，fork/join框架的优势体现在对其中包含的任务的处理方式上。在一般线程池中，如果一个线程正在执行的任务由于某些原因无法继续运行，那么该线程会处于等待状态。
 - 而在fork/join框架实现中，如果某个子问题由于等待另外一个子问题的完成而无法继续运行，**那么处理该子问题的线程会主动寻找其他尚未运行的子问题来执行**，这种方式减少了线程的等待时间，提高了性能。
 
+代码：[T12_ForkJoinPool](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_032_ThreadPool/T12_ForkJoinPool.java)
+
 ### WorkStealing
 - 每一个线程都有一个自己的队列，当自己队列中的任务执行完毕后，会去别的线程的队列上拿一个任务来执行。
 - 本质上是一个ForkJoinPool。
 
-代码：[T11_WorkStealingPool]()
+![workstealing](https://imagebed-1259286100.cos.ap-beijing.myqcloud.com/img/workstealing.png)
+
+
+代码：[T11_WorkStealingPool](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_032_ThreadPool/T11_WorkStealingPool.java)
