@@ -371,6 +371,12 @@ PriorityQueue是有排序的，内部是一课堆排序的树结构。
         
 **简单使用及参数说明，这个要背下来**：[T06_HelloThreadPool](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_032_ThreadPool/T06_HelloThreadPool.java)
 
+#### 调整线程池的大小
+
+
+![threadsize](https://imagebed-1259286100.cos.ap-beijing.myqcloud.com/img/threadsize.png)
+
+
 ### Executors
 - Executors，可以看成是线程池的工厂，可以用来产生各种各样的线程池。
 - 其底层都是靠ThreadPoolExecutor实现的。
