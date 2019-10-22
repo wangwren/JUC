@@ -32,6 +32,8 @@ synchronized底层实现：
     
 - 只有锁的升级，没有锁的降级。
 
+[彻底搞懂synchronized(从偏向锁到重量级锁)](http://wangwren.com/2019/10/%E5%BD%BB%E5%BA%95%E6%90%9E%E6%87%82synchronized-%E4%BB%8E%E5%81%8F%E5%90%91%E9%94%81%E5%88%B0%E9%87%8D%E9%87%8F%E7%BA%A7%E9%94%81/)
+
 ### 那什么时候用自旋，什么时候用重量级锁？
 - 执行时间少(加锁代码)，线程数少(如果线程数太多了，用自旋也不行)，用自旋锁；因为每个线程会很快的执行完了。
 - 执行时间长，线程数多，用系统(OS)锁。重量级锁。
@@ -89,6 +91,8 @@ LongAdder类
 
 代码在[c_015](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_015)部分。
 
+[并发的核心：CAS 是什么？Java8是如何优化 CAS 的?](http://wangwren.com/2019/10/%E5%B9%B6%E5%8F%91%E7%9A%84%E6%A0%B8%E5%BF%83%EF%BC%9ACAS-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9FJava8%E6%98%AF%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96-CAS-%E7%9A%84/)
+
 ## ReentrantLock 重入锁
 - ReentrantLock可用来替代synchronized，使用ReentrantLock可以完成同样的功能。
 - 注意：使用ReentrantLock**必须要手动释放锁**
@@ -105,6 +109,8 @@ LongAdder类
     - synchronized默认进行了四种锁的状态的升级。
 
 代码在[c_016](https://github.com/wangwren/JUC/tree/master/src/main/java/juc/c_016)部分
+
+[重量级锁、自旋锁、轻量级锁、偏向锁、悲观、乐观锁等各种锁](http://wangwren.com/2019/10/%E9%87%8D%E9%87%8F%E7%BA%A7%E9%94%81%E3%80%81%E8%87%AA%E6%97%8B%E9%94%81%E3%80%81%E8%BD%BB%E9%87%8F%E7%BA%A7%E9%94%81%E3%80%81%E5%81%8F%E5%90%91%E9%94%81%E3%80%81%E6%82%B2%E8%A7%82%E3%80%81%E4%B9%90%E8%A7%82%E9%94%81%E7%AD%89%E5%90%84%E7%A7%8D%E9%94%81/)
 
 ## CountDownLatch 门闩
 
@@ -250,7 +256,7 @@ Vector和HashTable在JDK1.0就有了，在当初设计的时候有点问题，�
 
 Map的进化历程：HashTable -> HashMap -> SynchronizedHashMap -> ConcurrentHashMap
 
-跳表参考:http://blog.csdn.net/sunxianghuang/article/details/52221913
+跳表参考:[跳表（SkipList）及ConcurrentSkipListMap源码解析](http://blog.csdn.net/sunxianghuang/article/details/52221913)
 
 [T01_ConcurrentHashMap](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_031/T01_ConcurrentHashMap.java)
 
@@ -266,9 +272,9 @@ Map的进化历程：HashTable -> HashMap -> SynchronizedHashMap -> ConcurrentHa
     - Collections.synchronizedXXX：其内部也是使用的synchronized。
     
 使用早期的**同步容器**以及`Collections.snchronizedXXX`方法的不足之处，参考：
-http://blog.csdn.net/itm_hadf/article/details/7506529
+[java集合框架【3】 java1.5新特性 ConcurrentHashMap、Collections.synchronizedMap、Hashtable讨论](http://blog.csdn.net/itm_hadf/article/details/7506529)
 
-使用新的并发容器：http://xuganggogo.iteye.com/blog/321630
+使用新的并发容器：[jdk1.5新特性 ConcurrentHashMap](http://xuganggogo.iteye.com/blog/321630)
 
 #### CopyOnWriteList
 代码：[T02_CopyOnWriteList](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_031/T02_CopyOnWriteList.java)
