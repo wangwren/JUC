@@ -25,5 +25,16 @@
         <maven.compiler.target>1.11</maven.compiler.target>
     </properties>
 
+    <!-- https://mvnrepository.com/artifact/com.lmax/disruptor -->
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/com.lmax/disruptor -->
+        <dependency>
+            <groupId>com.lmax</groupId>
+            <artifactId>disruptor</artifactId>
+            <version>3.3.6</version>
+        </dependency>
+
+    </dependencies>
+
 
 </project>
