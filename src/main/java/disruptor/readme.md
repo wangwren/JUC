@@ -56,7 +56,7 @@ Disruptor简单理解就是内存里用于存放元素的，高效率队列。
 3. 定义EventHandler（消费者），处理容器中的元素
 
 ## 事件发布模板
-完整代码:[Main01]()
+完整代码:[Main01](https://github.com/wangwren/JUC/blob/master/src/main/java/disruptor/Main01.java)
 
 ```java
 //生产者
@@ -84,7 +84,7 @@ try {
 
 ## 使用EventTranslator发布事件
 
-完整代码:[Main02]()
+完整代码:[Main02](https://github.com/wangwren/JUC/blob/master/src/main/java/disruptor/Main02.java)
 
 ```java
 //使用Translator会将数据转成一个event，这种写法就是替代Main01部分的try catch
@@ -153,7 +153,7 @@ ringBuffer.publishEvent(translatorVararg,1000L,1000L,1000L,1000L);
 
 ## 使用Lamda表达式
 
-完整代码:[Main03]()
+完整代码:[Main03](https://github.com/wangwren/JUC/blob/master/src/main/java/disruptor/Main03.java)
 
 ```java
 package disruptor;
@@ -200,7 +200,7 @@ public class Main03 {
 > 如果确认是单线程生产者，那么可以指定SINGLE，效率会提升
 > 如果是多个生产者（多线程），但模式指定为SINGLE，会出什么问题呢？线程不安全了，指定为SINGLE，当多线程访问sequence位置上的元素时就不会加锁了。
 
-代码：[Main04_ProducerType]()
+代码：[Main04_ProducerType](https://github.com/wangwren/JUC/blob/master/src/main/java/disruptor/Main01.java)
 
 ## 等待策略(8种)
 - (常用）BlockingWaitStrategy：通过线程阻塞的方式，等待生产者唤醒，被唤醒后，再循环检查依赖的sequence是否已经消费。
@@ -216,6 +216,4 @@ public class Main03 {
 - 默认：disruptor.setDefaultExceptionHandler()
 - 覆盖：disruptor.handleExceptionFor().with()
 
-代码：[Main07_ExceptionHandler]()
-
-
+代码：[Main07_ExceptionHandler](https://github.com/wangwren/JUC/blob/master/src/main/java/disruptor/Main07_ExceptionHandler.java)

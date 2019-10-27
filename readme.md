@@ -473,3 +473,6 @@ PriorityQueue是有排序的，内部是一课堆排序的树结构。
 
 
 代码：[T11_WorkStealingPool](https://github.com/wangwren/JUC/blob/master/src/main/java/juc/c_032_ThreadPool/T11_WorkStealingPool.java)
+
+## Disruptor
+[Disruptor](https://github.com/wangwren/JUC/tree/master/src/main/java/disruptor)
