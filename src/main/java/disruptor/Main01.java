@@ -4,6 +4,7 @@ import com.lmax.disruptor.RingBuffer;
 import com.lmax.disruptor.dsl.Disruptor;
 
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -60,6 +61,10 @@ public class Main01 {
             //发布，生产，将这个位置上的消息发布出来等待消费
             ringBuffer.publish(sequence);
         }
+
+        TimeUnit.SECONDS.sleep(3);
+
+        System.out.println(LongEventHandle.count);
 
         /**
          * 其实消费者就是上面创建disruptor时，构造函数里指定的【线程工厂】中的线程去消费的

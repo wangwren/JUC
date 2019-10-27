@@ -13,7 +13,7 @@ public class LongEventHandle implements EventHandler<LongEvent> {
     /**
      * 记录处理消息的数量，总共处理了多少条消息
      */
-    private static long count = 0;
+    public static long count = 0;
 
     /**
      * 处理消息的时候默认调用onEvent方法
@@ -24,7 +24,7 @@ public class LongEventHandle implements EventHandler<LongEvent> {
      */
     @Override
     public void onEvent(LongEvent event, long sequence, boolean endOfBatch) throws Exception {
-        count++;
+        count ++;
         System.out.println("[" + Thread.currentThread().getName() + "] " + event + "序号：" + sequence);
     }
 }
