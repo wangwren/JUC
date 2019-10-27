@@ -12,6 +12,8 @@
 
 - [并发框架Disruptor译文](http://ifeve.com/disruptor/)
 
+- [高性能队列Disruptor](http://wangwren.com/2019/10/%E9%AB%98%E6%80%A7%E8%83%BD%E9%98%9F%E5%88%97Disruptor/)
+
 1. disruptor:翻译为分裂，瓦解
 2. 一个线程中每秒处理600万订单
 3. 2011年Duke奖
