@@ -4,7 +4,7 @@
 
 ## Stargazers over time
 
-[![Stargazers over time](https://starchart.cc/wangwren/JUC.svg)](https://starchart.cc/wangwren¡/JUC)
+[![Stargazers over time](https://starchart.cc/wangwren/JUC.svg)](https://starchart.cc/wangwren/JUC)
 
 ## 线程
 - 线程的创建和启动
