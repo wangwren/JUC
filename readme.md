@@ -2,6 +2,10 @@
 
 ![juc](https://imagebed-1259286100.cos.ap-beijing.myqcloud.com/img/juc.jpg)
 
+## Stargazers over time
+
+[![Stargazers over time](https://starchart.cc/wangwren/JUC.svg)](https://starchart.cc/wangwren¡/JUC)
+
 ## 线程
 - 线程的创建和启动
 - 线程的sleep、yield、join
